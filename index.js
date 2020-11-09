@@ -11,10 +11,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(cors());
-app.use(router);
-
-// Add headers
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -33,6 +29,11 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+// app.use(cors());
+app.use(router);
+
+// Add headers
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
