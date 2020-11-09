@@ -11,18 +11,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-router.get('/', function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
-  res.setHeader('Access-Control-Allow-Credentials', true); // If needed
-
-  res.send('cors problem fixed:)');
-});
-// app.use(cors());
+app.use(cors());
 app.use(router);
-
-// Add headers
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
@@ -58,4 +48,4 @@ io.on('connect', (socket) => {
   })
 });
 
-server.listen(process.env.PORT || 3000, () => console.log(`Server has started.`));
+server.listen(process.env.PORT || 3003, () => console.log(`Server has started.`));
