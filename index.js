@@ -11,7 +11,21 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(cors());
+// app.use(cors());
+
+app.all("*", (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, HEAD, PUT, PATCH, POST, DELETE",
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
 app.use(router);
 
 io.on('connect', (socket) => {
