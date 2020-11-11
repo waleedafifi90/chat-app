@@ -12,21 +12,23 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // app.use(cors());
+app.use(cors());
+app.options('*', cors());
 
-app.all("*", (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS",
-  );
+// app.all("*", (req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS",
+//   );
 
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-  );
-  console.log(req.method, req.url);
-  next();
-});
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+//   );
+//   console.log(req.method, req.url);
+//   next();
+// });
 
 
 app.use(router);
